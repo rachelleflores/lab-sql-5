@@ -67,3 +67,20 @@ SET FOREIGN_KEY_CHECKS=1;
 SELECT *
 FROM customer
 WHERE active = 0;
+
+SELECT * 
+FROM rental as r
+INNER JOIN deleted_users as d
+ON r.customer_id = d.customer_id;
+
+SELECT *
+FROM deleted_users;
+
+-- just inserting the deleted inactive users back to the customer table :)
+
+INSERT INTO customer
+SELECT * FROM deleted_users;
+
+SELECT *
+FROM customer
+WHERE active = 0;
